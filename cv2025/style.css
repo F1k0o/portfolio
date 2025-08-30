@@ -1,0 +1,258 @@
+/* Základní styly */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    max-width: 1100px;
+    width: 100%;
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Hlavička s fotkou */
+.header {
+    display: flex;
+    background: linear-gradient(to right, #2c3e50, #3498db);
+    color: white;
+    padding: 30px;
+    align-items: center;
+    position: relative;
+}
+
+.profile-img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    object-fit: cover;
+    margin-right: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.header-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.header-content p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* Hlavní obsah - dvousloupcový layout */
+.main-content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.left-column {
+    flex: 1;
+    min-width: 300px;
+    padding: 30px;
+    background-color: #f8f9fa;
+}
+
+.right-column {
+    flex: 2;
+    min-width: 400px;
+    padding: 30px;
+    background-color: white;
+}
+
+/* Sekce */
+.section {
+    margin-bottom: 30px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #3498db;
+    display: flex;
+    align-items: center;
+}
+
+h2 i {
+    margin-right: 10px;
+    color: #3498db;
+}
+
+h3 {
+    font-size: 1.2rem;
+    color: #2c3e50;
+    margin: 15px 0 8px;
+}
+
+/* Seznamy */
+ul {
+    list-style-type: none;
+    padding-left: 5px;
+}
+
+li {
+    margin-bottom: 12px;
+    padding-left: 25px;
+    position: relative;
+}
+
+li:before {
+    content: "•";
+    color: #3498db;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    font-size: 1.4rem;
+}
+
+/* Praxe a vzdělání */
+.experience-item, .education-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f0f4f7;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.date {
+    color: #3498db;
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: block;
+    font-size: 0.95rem;
+}
+
+/* Kontakt */
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.contact-item i {
+    width: 25px;
+    color: #3498db;
+    margin-right: 10px;
+}
+
+/* Dovednosti */
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.skill-category {
+    background-color: #f0f4f7;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+/* Kurzy */
+.course {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f0f4f7;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.course-duration {
+    color: #7f8c8d;
+    font-style: italic;
+    margin: 5px 0;
+    display: block;
+}
+
+/* O mně */
+.about {
+    background-color: #f0f4f7;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Responzivní design */
+@media (max-width: 900px) {
+    .header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .profile-img {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+    
+    .main-content {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 600px) {
+    .header-content h1 {
+        font-size: 2rem;
+    }
+    
+    .header-content p {
+        font-size: 1rem;
+    }
+    
+    .profile-img {
+        width: 120px;
+        height: 120px;
+    }
+    
+    h2 {
+        font-size: 1.3rem;
+    }
+}
+
+/* Dekorativní prvky */
+.decoration {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    top: -50px;
+    right: -50px;
+}
+
+.decoration-2 {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    bottom: -30px;
+    left: 50px;
+}
