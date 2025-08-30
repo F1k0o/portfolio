@@ -1,0 +1,408 @@
+package logika;
+public class PrikazHadanka implements IPrikaz{
+    private static final String NAZEV = "hadanka";
+    private final HerniPlan plan;    
+    public PrikazHadanka(HerniPlan plan) {
+        this.plan = plan;
+ @Override
+    public String provedPrikaz(String... parametry) {
+        Prostor prostor = plan.getAktualniProstor();
+        if (prostor.getHadankaOdemcena()) {
+            if (prostor.getNazev().equals("2.svet")) {
+                return "Otazka: Jakou roli hraje rostlinny hormon ethylen v fyziologickych procesech rostlin?\n" +
+                        "a) Stimuluje kliceni semen\n" +
+                        "b) Reguluje tvorbu kvetu a plodu\n"+
+                        "c) Zpusobuje odpadavani listu";
+            } else if (prostor.getNazev().equals("3.svet")) {
+                return "Otazka: Ktera cast houby je zodpovedna za prijimani zivin z okoli?\n" +
+                        "a) Mycelium\n" +
+                        "b) Hyfy\n"+
+                        "c) Plodnice";
+            } else if (prostor.getNazev().equals("4.svet")) {
+                return "Otazka: Ktery proces vede ke vzniku puklin a rozpinani hornin?\n" +
+                        "a) Eroze\n" +
+                        "b) Meteorizace\n"+
+                        "c) Litifikace";
+            }
+        }
+        return "Nemůžeš odpovídat, dokud ti nepolozim otazku! >:(";    }    
+    @Override
+    public String getNazev() {
+        return NAZEV;
+    }
+}package logika;
+import java.util.List;
+public class PrikazHledej implements IPrikaz{    private static final String NAZEV = "hledej";
+    private HerniPlan plan;  
+    public PrikazHledej(HerniPlan plan) {
+        this.plan = plan;
+ @Override
+    public String provedPrikaz(String... parametry) {
+        // Získání aktuálního prostoru
+        Prostor aktualniProstor = plan.getAktualniProstor();        // Získání seznamu předmětů v aktuálním prostoru
+        List<Predmet> seznamPredmetu = aktualniProstor.getSeznamPredmetu();        // Projdi všechny předměty v aktuálním prostoru
+        for (Predmet predmet : seznamPredmetu) {
+            // Nastav viditelnost na true
+            predmet.setViditelny(true);
+        }        //Vypise vsechny predmety, vcetne tech skrytych.        return plan.getAktualniProstor().vsechnyPredmety();
+    }
+    @Override
+    public String getNazev() {
+        return NAZEV;
+    }
+}
+public class PrikazKonec implements IPrikaz {    private static final String NAZEV = "konec";    private Hra hra 
+    public PrikazKonec(Hra hra) {
+        this.hra = hra;
+    
+@Override
+    public String provedPrikaz(String... parametry) {
+        if (parametry.length > 0) {
+            return "Ukončit co? Nechápu, proč jsi zadal druhé slovo.";
+        }
+        else {
+            hra.setKonecHry(true);
+            return "hra ukončena příkazem konec";
+        }
+    @Override
+    public String getNazev() {
+        return NAZEV;
+    }
+}
+package logika;
+public class PrikazNapoveda implements IPrikaz {    private static final String NAZEV = "pomoc";
+    private SeznamPrikazu platnePrikazy; 
+    public PrikazNapoveda(SeznamPrikazu platnePrikazy) {
+        this.platnePrikazy = platnePrikazy; 
+    @Override
+    public String provedPrikaz(String... parametry) {        return "Abys probadal cely ostrov je potřeba projít peti svety. Mezi jednotlivymi svety prochazis pomoci prikazu 'jdi' (napr. jdi 2.svet). \n" +
+                "Pro odemknuti nekterych svetu je potreba nalezt dosud neobjevene predmety a nasledne je pridat do sveho inventare pomoci prikazu 'seber %nazev predmetu%'.\n"+
+                "Pro zjisteni, ktery predmet doposud nebyl objeven, slouzi prikaz 'prozkoumej %nazev predmetu%'. Nektere predmety mohou byt skryte, najdes je pomoci prikazu 'hledej'.\n"+
+                "Pokud odpovidas na otazku, odpovidej pomoci prikazu 'odpoved %pismeno odpovedi%'.\n"+
+                "Tohle jsou vsechny potrebne informace, ktere potrebujes znat. Hodne stesti!";
+    }    
+    @Override
+      public String getNazev() {
+        return NAZEV;
+     }    public SeznamPrikazu getPlatnePrikazy() {
+        return platnePrikazy;
+    }
+}
+package logika;
+public class PrikazOdpoved implements IPrikaz{
+    private String nazev = "odpoved";
+    HerniPlan plan;
+    }
+    @Override
+    public String provedPrikaz(String... parametry) {
+        if(parametry.length == 0){
+            return "Musis napsat pismeno spravne odpovedi!";
+        }
+        if(parametry.length > 1){
+            return "Zadal jsi moc znaku! Musis zadat pouze pismeno odpovei.";
+        }
+        String odpoved = parametry[0];
+        PrikazSeber prikazSeber = new PrikazSeber(plan);
+        Prostor prostor = plan.getAktualniProstor();        if (prostor.getHadankaOdemcena()) {
+            if (odpoved.equalsIgnoreCase("C") && plan.getAktualniProstor().getNazev().equals("2.svet")) {
+                HerniPlan.level++;
+                prostor.zmenaHadanky("rostlina");
+                prikazSeber.provedPrikaz("rostlina");
+                return "Dobra prace! Uspesne jsi pridal predmet rostlina do sveho inventare.\n" + "Nyni muzes pokracovat do dalsiho sveta!";
+            } else if (odpoved.equalsIgnoreCase("B") && plan.getAktualniProstor().getNazev().equals("3.svet")) {
+                HerniPlan.level++;
+                prostor.zmenaHadanky("exoticka_houba");
+                prikazSeber.provedPrikaz("exoticka_houba");
+                return "Dobra prace! Uspesne jsi pridal predmet exoticka_houba do sveho inventare.\n" + "Nyni muzes pokracovat do dalsiho sveta!";
+            } else if (odpoved.equalsIgnoreCase("B") && plan.getAktualniProstor().getNazev().equals("4.svet")) {
+                HerniPlan.level++;
+                prostor.zmenaHadanky("vetsi_sutr");
+                prikazSeber.provedPrikaz("vetsi_sutr");
+                return "Dobra prace! Uspesne jsi pridal predmet vetsi_sutr do sveho inventare.\n" + "Nyni muzes pokracovat do dalsiho sveta!";
+            } else {
+                return "Nespravna odpoved. Zkus to znovu.";
+            }
+        } else {
+            return "Nemůžeš odpovídat, dokud ti nepolozim otazku! >:(";
+        }    
+    @Override
+    public String getNazev() {
+        return nazev;
+    }
+}
+package logika;
+public class PrikazPoloz implements  IPrikaz{
+    private static final String NAZEV = "poloz";    private final HerniPlan plan;
+    public PrikazPoloz(HerniPlan plan) {
+        this.plan = plan;
+    
+    @Override
+    public String provedPrikaz(String... parametry) {
+        if (parametry.length ==0){
+            return "Co ?";
+        }        if (parametry.length > 1){
+            return  "Moc!";
+        }        String nazevVeci = parametry[0];
+        Predmet pozadovanaVec = plan.getInventar().vyndejZInventare(nazevVeci);        if (pozadovanaVec != null){
+            plan.getAktualniProstor().vlozPredmet(pozadovanaVec);
+            return "Predemt: " + nazevVeci + " jsi polozil do mistnosti.";
+        }        return nazevVeci + " to tam neni";    }
+    @Override
+    public String getNazev() {
+        return NAZEV;
+    }
+}
+package logika;
+public class PrikazProzkoumej implements IPrikaz{
+    private static final String NAZEV = "prozkoumej";
+    private HerniPlan plan;
+    public PrikazProzkoumej(HerniPlan plan) {
+        this.plan = plan;
+    }
+    @Override
+    public String provedPrikaz(String... parametry) {
+        if (parametry.length == 0) {
+            // Pokud uživatel nezadal žádný předmět k prozkoumání
+            return "Co mám prozkoumat? Musíš zadat název předmětu.";
+        }        String nazevPredmetu = parametry[0]; // Název předmětu
+        Prostor aktualniProstor = plan.getAktualniProstor(); // Aktuální prostor        // Získání seznamu předmětů v aktuálním prostoru
+        for (Predmet predmet : aktualniProstor.getSeznamPredmetu()) {
+            // Pokud název předmětu odpovídá zadanému parametru
+            if (predmet.getNazev().equalsIgnoreCase(nazevPredmetu)) {
+                // Ověření, zda má předmět proměnnou "objeveno" nastavenou na false
+                if(predmet.getObjeveno() && !predmet.getHadanka()){
+                    predmet.setProzkoumano(true);
+                    return "Tento predmet uz byl objeven. Hledej dal.";
+                } else if (predmet.getProzkoumano()) {
+                    // Pokud má předmět již "objeveno" nastavené na true
+                    return "Předmět " + nazevPredmetu + " už jsi prozkoumal dříve.";
+                } else {
+                    // Pokud má předmět "objeveno" nastavené na false
+                    // Změna hodnoty proměnné "objeveno" na true
+                    predmet.setProzkoumano(true);
+                    // Vrácení informace o úspěšném prozkoumání předmětu
+                    return "Gratuluji! Predmet " + nazevPredmetu + " doposud nebyl objeven.";
+                }
+            }
+        }
+        // Pokud předmět nebyl nalezen v aktuálním prostoru
+        return "Předmět '" + nazevPredmetu + "' nebyl v aktuálním prostoru nalezen.";
+    }
+    @Override
+    public String getNazev() {
+        return NAZEV;
+    }
+}
+package logika;
+public class PrikazSeber implements IPrikaz{    private static final String NAZEV = "seber";    private final HerniPlan plan;
+    public PrikazSeber(HerniPlan plan) {
+        this.plan = plan;
+    }
+    @Override
+    public String provedPrikaz(String... parametry) {
+        if(parametry.length == 0){
+            return "Co mám sebrat? Musíš zadat název předmětu!";
+        }        if(parametry.length > 1){
+            return "Chceš toho sebrat nějak moc. Můžeš najednou sebrat jen jednu věc";
+        }        String nazevVeci = parametry[0];        if (plan.getAktualniProstor().obsahujeVec(nazevVeci)){
+           Predmet pozadovanaVec = plan.getAktualniProstor().vyberVec(nazevVeci);
+            if(pozadovanaVec == null){
+                return "chyba";
+            }
+            if(!pozadovanaVec.getProzkoumano()){
+                return "Tento predmet jeste nemas probadany! Nejdrive ho prozkoumej.";
+            }
+            if(pozadovanaVec.getHadanka()){
+                plan.getAktualniProstor().setHadankaOdemcena(true);
+                return "Pro sebrani tohoto predmetu musis spravne odpovedet na otazku.\n"+
+                        "Pokud chces pokracovat, napis prikaz: 'hadanka'.";
+            }            boolean povedloSeVlozit = plan.getInventar().vlozDoInventare(pozadovanaVec);
+            if (povedloSeVlozit){
+                return "Sebral jsi " + nazevVeci;
+            }            plan.getAktualniProstor().vlozPredmet(pozadovanaVec);
+            return  "Tento predmet nelze sebrat!";
+        }
+        return nazevVeci + " se nenachází v tomto prostoru.";
+    }
+    @Override
+    public String getNazev() {
+        return NAZEV;
+    }
+}
+package logika;import java.util.*;
+import java.util.stream.Collectors;
+ 
+public class Prostor {    private String nazev;
+    private String popis;
+    private Set<Prostor> vychody;   // obsahuje sousední místnosti
+    private List<Predmet> seznamPredmetu;
+    private boolean hadankaOdemcena;
+    private int level;   
+    public Prostor(String nazev, String popis, boolean hadankaOdemcena, int level) {
+        this.nazev = nazev;
+        this.popis = popis;
+        this.hadankaOdemcena = hadankaOdemcena;
+        this.level = level;
+        vychody = new HashSet<>();
+        seznamPredmetu = new ArrayList<Predmet>();
+    }    
+    public void setVychod(Prostor vedlejsi) {
+        vychody.add(vedlejsi);
+    }    
+      @Override
+    public boolean equals(Object obj) {
+        // porovnáváme zda se nejedná o dva odkazy na stejnou instanci
+        if (this == obj) {
+            return true;
+        }
+        // porovnáváme jakého typu je parametr 
+        if (!(obj instanceof Prostor)) {
+            return false;    // pokud parametr není typu Prostor, vrátíme false
+        }
+        // přetypujeme parametr na typ Prostor 
+        Prostor druhy = (Prostor) obj;        //metoda equals třídy java.util.Objects porovná hodnoty obou názvů. 
+        //Vrátí true pro stejné názvy a i v případě, že jsou oba názvy null,
+        //jinak vrátí false.       return (java.util.Objects.equals(this.nazev, druhy.nazev));       
+    }    
+    @Override
+    public int hashCode() {
+        int vysledek = 3;
+        int hashNazvu = java.util.Objects.hashCode(this.nazev);
+        vysledek = 37 * vysledek + hashNazvu;
+        return vysledek;
+    }
+    public String getNazev() {
+        return nazev;       
+    }    
+    public String dlouhyPopis() {
+        return "Nyni se nachazis v lokaci " + popis + "\n"
+                + popisPredmetu() + "\n"
+                + popisVychodu();
+    }   
+    public String popisVychodu() {
+        String vracenyText = "vychody:";
+        for (Prostor sousedni : vychody) {
+            vracenyText += " " + sousedni.getNazev();
+        }
+        return vracenyText;
+    }    
+    private String popisPredmetu(){
+        String vracenyText = "predmety k prozkoumani: ";
+        for (Predmet predmet: seznamPredmetu){
+            vracenyText = vracenyText + predmet.getNazev() + " ";
+        }
+        return vracenyText;
+    }    
+    public String vsechnyPredmety() {
+        if(HerniPlan.level >= 3) {
+            String vracenyText = "Nasel jsi skryty predmet!\n" +
+                    "predmety k prozkoumani: ";
+            System.out.println("");
+            for (Predmet predmet : seznamPredmetu) {
+                vracenyText = vracenyText + predmet.getNazevVse();
+            }
+            return vracenyText;
+        } else {
+            return "Zde nic neni.";
+        }
+    }
+    public Prostor vratSousedniProstor(String nazevSouseda) {
+        List<Prostor> hledaneProstory =
+                vychody.stream()
+                        .filter(sousedni -> sousedni.getNazev().equals(nazevSouseda))
+                        .collect(Collectors.toList());
+        if(hledaneProstory.isEmpty()){
+            return null;
+        }
+    else {
+            return hledaneProstory.get(0);
+        }
+    }
+    public Collection<Prostor> getVychody() {
+        return Collections.unmodifiableCollection(vychody);
+    }    
+    public void vlozPredmet(Predmet predmet){seznamPredmetu.add(predmet);}
+    public boolean obsahujeVec(String nazevVeci){
+        for (Predmet vec: seznamPredmetu){
+            if(vec.getNazev().equals(nazevVeci)){
+                return true;
+            }
+        }
+        return false;
+    }
+ 
+    public Predmet vyberVec(String nazevVeci){
+        Predmet vybranaVec = null;
+        for(Predmet vec: seznamPredmetu){
+            if(vec.getNazev().equals(nazevVeci)){
+                vybranaVec = vec;
+            }
+        }        if (vybranaVec != null && vybranaVec.jePrenositelny() && !vybranaVec.getHadanka() && vybranaVec.getProzkoumano()) {
+            seznamPredmetu.remove(vybranaVec);
+        }
+        return vybranaVec;
+    }    
+    public void zmenaHadanky(String nazevVeci){
+        Predmet vybranaVec = null;
+        for(Predmet vec: seznamPredmetu){
+            if(vec.getNazev().equals(nazevVeci)){
+                vybranaVec = vec;
+            }
+        }
+        if(vybranaVec != null){
+            vybranaVec.setHadanka(false);        }    }    
+    public List<Predmet> getSeznamPredmetu() {
+        return new ArrayList<>(seznamPredmetu);
+    }    
+    public void setHadankaOdemcena(boolean hadankaOdemcena) {
+        this.hadankaOdemcena = hadankaOdemcena;
+    }    
+    public boolean getHadankaOdemcena() {
+        return hadankaOdemcena;
+    }    
+    public int getLevel() {
+        return level;
+    }
+}
+package logika;import java.util.HashMap;
+import java.util.Map;
+public class SeznamPrikazu {
+    // mapa pro uložení přípustných příkazů
+    private  Map<String,IPrikaz> mapaSPrikazy;   
+    public SeznamPrikazu() {
+        mapaSPrikazy = new HashMap<>();
+    }    
+    public void vlozPrikaz(IPrikaz prikaz) {
+        mapaSPrikazy.put(prikaz.getNazev(),prikaz);
+    }    
+    public IPrikaz vratPrikaz(String retezec) {
+        if (mapaSPrikazy.containsKey(retezec)) {
+            return mapaSPrikazy.get(retezec);
+        }
+        else {
+            return null;
+        }
+    }    
+    public boolean jePlatnyPrikaz(String retezec) {
+        return mapaSPrikazy.containsKey(retezec);
+    }    
+    public String vratNazvyPrikazu() {
+        String seznam = "";
+        for (String slovoPrikazu : mapaSPrikazy.keySet()){
+            seznam += slovoPrikazu + " ";
+        }
+        return seznam;
+    }
+}
+package main;
+import logika.*;
+import uiText.TextoveRozhrani;
+public class Start
+{  
+    public static void main(String[] args)
+    {
+        IHra hra = new Hra();
+        TextoveRozhrani ui = new TextoveRozhrani(hra);
+        ui.hraj();
+    }
+}

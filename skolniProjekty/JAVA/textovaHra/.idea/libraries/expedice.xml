@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="expedice">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/expedice.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/expedice-kod-a-testy/expedice-kod-a-testy.iml" filepath="$PROJECT_DIR$/expedice-kod-a-testy/expedice-kod-a-testy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/expedice-kod-a-testy/src/expedice-kod-a-testy1.iml" filepath="$PROJECT_DIR$/expedice-kod-a-testy/src/expedice-kod-a-testy1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/morf02-semetralniPrace.iml" filepath="$PROJECT_DIR$/.idea/morf02-semetralniPrace.iml" />
+    </modules>
+  </component>
+</project>

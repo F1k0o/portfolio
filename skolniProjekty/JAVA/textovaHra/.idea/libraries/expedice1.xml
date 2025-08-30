@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="expedice1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/expedice-kod-a-testy/out/artifacts/adventuraZaklad_2020_origin_jar/expedice.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

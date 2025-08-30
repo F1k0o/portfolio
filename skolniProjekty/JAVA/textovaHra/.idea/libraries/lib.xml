@@ -1,0 +1,32 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/expedice-kod-a-testy/lib/junit-jupiter-params-5.10.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/expedice-kod-a-testy/lib/opentest4j-1.3.0-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/expedice-kod-a-testy/lib/apiguardian-api-1.1.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/expedice-kod-a-testy/lib/junit-jupiter-engine-5.10.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/expedice-kod-a-testy/lib/junit-jupiter-api-5.10.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/expedice-kod-a-testy/lib/junit-platform-engine-1.10.2-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/expedice-kod-a-testy/lib/junit-jupiter-engine-5.10.2-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/expedice-kod-a-testy/lib/junit-platform-commons-1.10.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/expedice-kod-a-testy/lib/junit-jupiter-params-5.10.2-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/expedice-kod-a-testy/lib/junit-jupiter-api-5.10.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/expedice-kod-a-testy/lib/junit-platform-engine-1.10.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/expedice-kod-a-testy/lib/opentest4j-1.3.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/expedice-kod-a-testy/lib/junit-jupiter-5.10.2-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/expedice-kod-a-testy/lib/junit-jupiter-engine-5.10.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/expedice-kod-a-testy/lib/apiguardian-api-1.1.2-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/expedice-kod-a-testy/lib/junit-platform-commons-1.10.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/expedice-kod-a-testy/lib/opentest4j-1.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/expedice-kod-a-testy/lib/junit-platform-engine-1.10.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/expedice-kod-a-testy/lib/apiguardian-api-1.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/expedice-kod-a-testy/lib/junit-platform-commons-1.10.2-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/expedice-kod-a-testy/lib/junit-jupiter-api-5.10.2-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/expedice-kod-a-testy/lib/junit-jupiter-5.10.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/expedice-kod-a-testy/lib/junit-jupiter-params-5.10.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/expedice-kod-a-testy/lib/junit-jupiter-5.10.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
