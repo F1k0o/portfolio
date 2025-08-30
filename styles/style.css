@@ -200,41 +200,6 @@ li:before {
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-/* Responzivní design */
-@media (max-width: 900px) {
-    .header {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .profile-img {
-        margin-right: 0;
-        margin-bottom: 20px;
-    }
-    
-    .main-content {
-        flex-direction: column;
-    }
-}
-
-@media (max-width: 600px) {
-    .header-content h1 {
-        font-size: 2rem;
-    }
-    
-    .header-content p {
-        font-size: 1rem;
-    }
-    
-    .profile-img {
-        width: 120px;
-        height: 120px;
-    }
-    
-    h2 {
-        font-size: 1.3rem;
-    }
-}
 
 /* Dekorativní prvky */
 .decoration {
@@ -293,4 +258,69 @@ a::after {
 a:hover::after {
     transform: scaleX(1);
     transform-origin: bottom left;
+}
+
+/* Responzivní design */
+@media (max-width: 900px) {
+    .header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .profile-img {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+    
+    .main-content {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 600px) {
+    .header-content h1 {
+        font-size: 2rem;
+    }
+    
+    .header-content p {
+        font-size: 1rem;
+    }
+    
+    .profile-img {
+        width: 120px;
+        height: 120px;
+    }
+    
+    h2 {
+        font-size: 1.3rem;
+    }
+}
+
+/* Oprava pro extra malé obrazovky */
+@media (max-width: 450px) {
+    .container {
+        padding: 0;
+        border-radius: 0;
+        box-shadow: none;
+        min-width: 0;
+    }
+    .header, .left-column, .right-column {
+        padding: 15px;
+    }
+    .left-column, .right-column {
+        min-width: 0;
+        width: 100%;
+        padding: 10px;
+    }
+    .profile-img {
+        width: 80px;
+        height: 80px;
+    }
+    h2 {
+        font-size: 1.1rem;
+    }
+    .skills-container {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
 }
